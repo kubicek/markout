@@ -13,7 +13,7 @@ module Markout
       @date   = commit.date
       @author = commit.author.to_s
       @subject, @message = parse_commit_message(commit)
-      @diff   = %x[cd #{@repo.path} && git show #{@sha} 2>&1]
+      @diff   = %x[cd "#{@repo.path}" && git show #{@sha} 2>&1]
     end
 
     def diff(options={})
@@ -51,7 +51,7 @@ module Markout
 
     def inline_diff
       # FIXME: Cleanup
-      output  = %x[cd #{@repo.path} && git show --no-prefix --ignore-space-at-eol --color-words #{@sha} 2>&1]
+      output  = %x[cd "#{@repo.path}" && git show --no-prefix --ignore-space-at-eol --color-words #{@sha} 2>&1]
       if $?.success?
         return convert_bash_color_codes( output.gsub(/(.*)@@(.*)/m, '\2') )
       else
