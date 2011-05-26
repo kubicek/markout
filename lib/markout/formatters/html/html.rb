@@ -10,7 +10,7 @@ module Markout
 
     def export
       suck_in_images! unless @options[:no_embed_images]
-      ERB.new( File.read(template_path.join('content.rhtml')) ).result(binding)
+      ERB.new( File.read(template_path.join('content.rhtml')),nil,'%<>-').result(binding)
     end
 
     private
