@@ -9,7 +9,7 @@ module Markout
   class Pdf < Formatter
 
     def export
-      `cat "#{tempfile.path}" | /opt/local/bin/htmldoc -t pdf \
+      `cat "#{tempfile.path}" | htmldoc -t pdf \
           --bodyfont "Helvetica" --headfootfont "Helvetica" \
           --no-compression --color --embedfonts \
           --header "" --footer .1. --links \
@@ -24,6 +24,7 @@ module Markout
       # FIXME : Does not display embedded images...
       content  = Markout::Html.new(@document, :template => 'pdf', :no_embed_images => true).export
       tempfile << content.gsub(/[^\x00-\x7F]/) { |ch| "&##{ch.unpack("U")[0]};" } # From the Textmate Markdown bundle
+      tempfile.flush
     end
 
   end
