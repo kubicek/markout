@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
 
   s.rdoc_options = ["--charset=UTF-8"]
 
-  s.add_dependency("shacon-grit")
+  s.add_dependency("grit")
   s.add_dependency("rdiscount")
   s.add_dependency("mime-types")
 end
